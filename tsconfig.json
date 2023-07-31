@@ -1,10 +1,6 @@
 {
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -18,13 +14,7 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-, "craco.config.js"  ],
-  "exclude": [
-    "node_modules"
-  ],
-  "extends": "./tsconfig.path.json"
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "craco.config.js"],
+  "exclude": ["node_modules"],
+  "extends": "./tsconfig.path"
 }
