@@ -22,8 +22,9 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "craco.config.js"  ],
   "exclude": [
     "node_modules"
-  ]
+  ],
+  "extends": "./tsconfig.path.json"
 }

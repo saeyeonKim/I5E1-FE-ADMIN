@@ -21,5 +21,6 @@
         "html": true
       }
     ]
-  }
+  },
+  "import/no-unresolved": "off" // craco-alias
 }
