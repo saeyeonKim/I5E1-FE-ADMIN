@@ -1,6 +1,6 @@
 import axios from 'axios'
 import dayjs from 'dayjs'
-import type { Todo } from '@test/api'
+import { Todo } from '@type/api'
 
 import { useEffect, useState } from 'react'
 
