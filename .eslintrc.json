@@ -1,6 +1,7 @@
 {
   "plugins": ["prettier"],
   "extends": "next/core-web-vitals",
+  "import/no-unresolved": "off",
   // plugins외 추가 규칙을 설정합니다.
   "rules": {
     "no-console": "warn", // console 사용시 warning이 나타납니다. 배포할 떄 지워줘야하니까 warn합니다. +> transform-remove-console로 대체합니다.
