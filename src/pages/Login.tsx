@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 const Login = () => {
   return (
-    <Body>
+    <Wrap>
       <Container>
         <Left>
           <Img src="/imgs/main-img.png" />
@@ -34,17 +34,17 @@ const Login = () => {
             </CheckboxArea>
           </InputArea>
           <ButtonArea>
-            <Link href="/Main">
+            <Link href="/Annual_Duty">
               <Btn>로그인</Btn>
             </Link>
           </ButtonArea>
         </Right>
       </Container>
-    </Body>
+    </Wrap>
   )
 }
 
-const Body = styled.body`
+const Wrap = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: #e4f2ff;
