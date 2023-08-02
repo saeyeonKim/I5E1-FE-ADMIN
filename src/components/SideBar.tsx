@@ -1,6 +1,5 @@
 import { styled } from 'styled-components'
 import Link from 'next/link'
-import { useState } from 'react'
 
 const SideBar = ({ active }) => {
   return (
@@ -46,7 +45,7 @@ const SideBar = ({ active }) => {
             </>
           )}
 
-          <Link href="/Login">
+          <Link href="/">
             <UnActiveBtn>
               <Icon3 src="/imgs/logout.png" />
               로그아웃

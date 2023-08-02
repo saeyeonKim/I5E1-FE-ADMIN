@@ -1,7 +1,26 @@
 import { styled } from 'styled-components'
-import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 
 const Login = () => {
+  const [id, setId] = useState('')
+  const [pw, setPw] = useState('')
+  const router = useRouter()
+
+  const LoginHandler = () => {
+    console.log(id, pw)
+    // 체크상태시 id 저장
+    // 추후 id,pw 넘겨 로그인 연동
+    // 유저 데이터 저장
+    // 화면 넘기기(Link 말고 useRouter 사용)
+    router.push('/Annual_Duty')
+  }
+  // 화면이 처음 로딩될 때 로컬스토리지에 데이터가 있으면 체크표시 만들기
+  // 인풋에 내용 넣기
+  useEffect(() => {
+    setId('111')
+  }, [])
+
   return (
     <Wrap>
       <Container>
@@ -22,11 +41,21 @@ const Login = () => {
           <InputArea>
             <EmailArea>
               <Email>이메일</Email>
-              <EmailInput />
+              <EmailInput
+                onChange={(e) => {
+                  setId(e.target.value)
+                }}
+                value={id}
+              />
             </EmailArea>
             <PwArea>
               <Pw>비밀번호</Pw>
-              <PwInput />
+              <PwInput
+                onChange={(e) => {
+                  setPw(e.target.value)
+                }}
+                type="password"
+              />
             </PwArea>
             <CheckboxArea>
               <Checkbox type="checkbox" name="이메일저장" />
@@ -34,9 +63,7 @@ const Login = () => {
             </CheckboxArea>
           </InputArea>
           <ButtonArea>
-            <Link href="/Annual_Duty">
-              <Btn>로그인</Btn>
-            </Link>
+            <Btn onClick={LoginHandler}>로그인</Btn>
           </ButtonArea>
         </Right>
       </Container>
