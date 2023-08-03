@@ -1,4 +1,5 @@
 import { styled } from 'styled-components'
+import { theme } from '@styles/theme'
 
 const Employee_Table = () => {
   return (
@@ -18,18 +19,18 @@ const Employee_Table = () => {
 const TableArea = styled.div`
   width: 1400px;
   height: 670px;
-  border: 1px solid #0474e4;
+  border: 1px solid ${theme.colors.blue.main};
   border-radius: 20px;
 `
 const NameArea = styled.div`
   width: 100%;
   height: 9.1%;
-  background-color: #0474e4;
+  background-color: ${theme.colors.blue.main};
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
   display: flex;
   justify-content: space-around;
-  color: #ffffff;
+  color: ${theme.colors.white};
   align-items: center;
   font-size: 16px;
   letter-spacing: -0.05rem;
