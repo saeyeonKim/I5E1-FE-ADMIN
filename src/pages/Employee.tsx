@@ -1,6 +1,7 @@
 import SideBar from '../components/SideBar'
 import { styled } from 'styled-components'
 import Employee_Table from '../components/Employee_Table'
+import { theme } from '@styles/theme'
 
 const Employee = () => {
   return (
@@ -63,7 +64,7 @@ const SearchWrap = styled.div`
   width: 270px;
   height: 45px;
   border-radius: 6px;
-  border: 1px solid #8e8e8e;
+  border: 1px solid ${theme.colors.gray};
   display: flex;
   align-items: center;
   justify-content: center;

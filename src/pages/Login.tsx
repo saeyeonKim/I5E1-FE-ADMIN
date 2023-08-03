@@ -1,6 +1,7 @@
 import { styled } from 'styled-components'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import { theme } from '@styles/theme'
 
 const Login = () => {
   const [id, setId] = useState('')
@@ -74,7 +75,7 @@ const Login = () => {
 const Wrap = styled.div`
   width: 100vw;
   height: 100vh;
-  background-color: #e4f2ff;
+  background-color: ${theme.colors.blue.loginbackground};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -86,13 +87,13 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #ffffff;
+  background-color: ${theme.colors.white};
 `
 const Left = styled.div`
   width: 715px;
   height: 820px;
   border-radius: 20px;
-  background-color: #0474e4;
+  background-color: ${theme.colors.blue.main};
   display: flex;
   justify-content: center;
   align-items: end;
@@ -128,7 +129,7 @@ const Ment = styled.div`
   font-weight: bold;
 `
 const Span = styled.span`
-  color: #0474e4;
+  color: ${theme.colors.blue.main};
   font-size: 60px;
   font-weight: bold;
 `
@@ -160,7 +161,7 @@ const Email = styled.p`
 const EmailInput = styled.input`
   width: 450px;
   height: 40px;
-  border: 1px solid #727272;
+  border: 1px solid ${theme.colors.gray};
   border-radius: 6px;
   padding: 10px;
   outline: none;
@@ -180,7 +181,7 @@ const Pw = styled.p`
 const PwInput = styled.input`
   width: 450px;
   height: 40px;
-  border: 1px solid #727272;
+  border: 1px solid ${theme.colors.gray};
   border-radius: 6px;
   padding: 10px;
   outline: none;
@@ -208,17 +209,17 @@ const ButtonArea = styled.div`
   align-items: center;
 `
 const Btn = styled.button`
-  background-color: #0474e4;
+  background-color: ${theme.colors.blue.main};
   width: 450px;
   height: 60px;
   border-radius: 30px;
-  color: #ffffff;
+  color: ${theme.colors.white};
   border: none;
   font-size: 16px;
   letter-spacing: -0.05rem;
   cursor: pointer;
   &:hover {
-    background-color: #186cc1;
+    background-color: ${theme.colors.blue.pressed};
   }
 `
 export default Login

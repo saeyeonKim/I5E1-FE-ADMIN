@@ -3,6 +3,7 @@ import SideBar from '../components/SideBar'
 import { useState } from 'react'
 import Annual from '../components/Annual'
 import Duty from '../components/Duty'
+import { theme } from '@styles/theme'
 
 const Annual_Duty = () => {
   const [active, setActive] = useState(true)
@@ -63,23 +64,25 @@ const Btns = styled.div`
   padding: 0 85px;
 `
 const ActiveBtn = styled.button`
-  background-color: #0474e4;
+  background-color: ${theme.colors.blue.main};
   width: 120px;
   height: 50px;
-  color: #ffffff;
+  color: ${theme.colors.white};
   font-size: 16px;
   border: none;
   border-radius: 6px;
   font-weight: bold;
+  cursor: pointer;
 `
 const UnActiveBtn = styled.button`
-  background-color: #ffffff;
+  background-color: ${theme.colors.white};
   width: 120px;
   height: 50px;
   font-size: 16px;
-  border: 1px solid #8e8e8e;
+  border: 1px solid ${theme.colors.gray};
   border-radius: 6px;
   font-weight: bold;
+  cursor: pointer;
 `
 const TableArea = styled.div`
   width: 100%;

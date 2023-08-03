@@ -1,5 +1,6 @@
 import { styled } from 'styled-components'
 import Link from 'next/link'
+import { theme } from '@styles/theme'
 
 const SideBar = ({ active }) => {
   return (
@@ -45,12 +46,12 @@ const SideBar = ({ active }) => {
             </>
           )}
 
-          <Link href="/">
+          <CustomLink href="/">
             <UnActiveBtn>
               <Icon3 src="/imgs/logout.png" />
               로그아웃
             </UnActiveBtn>
-          </Link>
+          </CustomLink>
         </MenuArea>
       </SideBarArea>
     </>
@@ -58,10 +59,10 @@ const SideBar = ({ active }) => {
 }
 const CustomLink = styled(Link)`
   text-decoration: none;
-  color: #ffffff;
+  color: ${theme.colors.white};
 `
 const SideBarArea = styled.div`
-  background-color: #000000;
+  background-color: ${theme.colors.black};
   width: 350px;
   height: 100%;
   border-top-right-radius: 30px;
@@ -86,16 +87,16 @@ const Profile = styled.div`
   gap: 10px;
 `
 const ProfileName = styled.div`
-  color: #ffffff;
+  color: ${theme.colors.white};
   font-size: 18px;
 `
 const ProfileStatus = styled.div`
   width: 55px;
   height: 26px;
-  background-color: #ff5252;
+  background-color: ${theme.colors.red};
   border-radius: 30px;
   font-size: 12px;
-  color: #ffffff;
+  color: ${theme.colors.white};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -110,21 +111,21 @@ const MenuArea = styled.div`
   align-items: center;
 `
 const ActiveBtn = styled.div`
-  color: #ffffff;
+  color: ${theme.colors.white};
   display: flex;
   gap: 10px;
   font-size: 16px;
   align-items: center;
   width: 280px;
   height: 40px;
-  background-color: #0474e4;
+  background-color: ${theme.colors.blue.main};
   border-radius: 20px;
   padding: 0 20px;
   cursor: pointer;
   text-decoration: none;
 `
 const UnActiveBtn = styled.div`
-  color: #ffffff;
+  color: ${theme.colors.white};
   display: flex;
   gap: 10px;
   font-size: 16px;
