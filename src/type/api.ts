@@ -6,3 +6,13 @@ export type Todo = {
   createdAt: string // 할 일 생성일
   updatedAt: string // 할 일 수정일
 }
+
+export interface IContent {
+  annualId: string
+  userId: string
+  dutyId: string
+}
+export interface ILogin {
+  email: string
+  password: string
+}

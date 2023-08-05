@@ -2,24 +2,47 @@ import { styled } from 'styled-components'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { theme } from '@styles/theme'
+import { login } from './api/api'
 
 const Login = () => {
   const [id, setId] = useState('')
   const [pw, setPw] = useState('')
+  const [check, setCheck] = useState(false)
   const router = useRouter()
 
-  const LoginHandler = () => {
-    console.log(id, pw)
+  const LoginHandler = (e: React.MouseEvent) => {
+    e.preventDefault()
+    // 이메일 저장 체크박스
+    localStorage.setItem('email', check ? id : '')
+
+    const res = login({ email: id, password: pw })
+
+    res
+      .then((res) => {
+        if (res.statusCode == 200) {
+          router.push('/Annual_Duty')
+        } else {
+          // 문제 있음.
+          alert('로그인 실패')
+        }
+      })
+      .catch((error) => {
+        //console.log(error)
+        alert('로그인 실패')
+      })
+
     // 체크상태시 id 저장
     // 추후 id,pw 넘겨 로그인 연동
     // 유저 데이터 저장
     // 화면 넘기기(Link 말고 useRouter 사용)
-    router.push('/Annual_Duty')
   }
   // 화면이 처음 로딩될 때 로컬스토리지에 데이터가 있으면 체크표시 만들기
   // 인풋에 내용 넣기
   useEffect(() => {
-    setId('222')
+    const localId = localStorage.getItem('email')
+    if (localId) {
+      setId(localId)
+    }
   }, [])
 
   return (
@@ -59,7 +82,12 @@ const Login = () => {
               />
             </PwArea>
             <CheckboxArea>
-              <Checkbox type="checkbox" name="이메일저장" />
+              <Checkbox
+                type="checkbox"
+                name="이메일저장"
+                checked={check}
+                onChange={(e) => setCheck(e.target.checked)}
+              />
               <CheckboxP>이메일 저장</CheckboxP>
             </CheckboxArea>
           </InputArea>
@@ -133,10 +161,7 @@ const Span = styled.span`
   font-size: 60px;
   font-weight: bold;
 `
-const SubLogo = styled.img`
-  width: 350px;
-  margin-right: 100px;
-`
+
 const InputArea = styled.div`
   width: 100%;
   height: 40%;
@@ -209,6 +234,7 @@ const ButtonArea = styled.div`
   align-items: center;
 `
 const Btn = styled.button`
+  margin-right: 20px;
   background-color: ${theme.colors.blue.main};
   width: 450px;
   height: 60px;
