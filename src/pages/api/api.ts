@@ -1,22 +1,21 @@
 import axios from 'axios'
+import { IContent, ILogin } from '@type/api'
 
 // API 공통 영역 변수
 const api = axios.create({
-  baseURL: 'http://52.78.195.183:3003/api',
+  baseURL: '/api',
   headers: {
     'Content-Type': 'application/json'
   }
 })
-// interface
-export interface IContent {
-  annualId: string
-  userId: string
-  dutyId: string
-}
 
 // 로그인
-const login = async () => {
-  const res = await api({ method: 'POST', url: '/login' })
+const login = async ({ email, password }: ILogin) => {
+  const res = await api({
+    method: 'POST',
+    url: '/login',
+    data: { email, password }
+  })
   return res.data
 }
 
