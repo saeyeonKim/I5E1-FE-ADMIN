@@ -3,12 +3,12 @@ import { styled } from 'styled-components'
 import { useEmployeeStore } from 'zustandState/store'
 
 const EmployeeList = () => {
-  const { data } = useEmployeeStore()
-  console.log('employeedata:', data)
+  const { searchdata } = useEmployeeStore()
+  console.log('employeedata:', searchdata)
 
   return (
     <>
-      {data?.members?.map((el, v) => (
+      {searchdata?.map((el, v) => (
         <ListContainer key={v}>
           <No>{el.id}</No>
           <Name>{el.name}</Name>
@@ -26,9 +26,9 @@ const EmployeeList = () => {
 }
 const ListContainer = styled.div`
   width: 100%;
-  height: 10%;
+  height: 10.01%;
   background-color: transparent;
-  border-top: 1px solid ${theme.colors.blue.main};
+  border-bottom: 1px solid ${theme.colors.blue.main};
   display: flex;
   justify-content: space-around;
   align-items: center;

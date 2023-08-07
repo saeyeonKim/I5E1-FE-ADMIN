@@ -25,6 +25,7 @@ const TableArea = styled.div`
   height: 670px;
   border: 1px solid ${theme.colors.blue.main};
   border-radius: 20px;
+  overflow: hidden;
 `
 const NameArea = styled.div`
   width: 100%;

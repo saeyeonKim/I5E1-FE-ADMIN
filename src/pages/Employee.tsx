@@ -3,14 +3,30 @@ import { styled } from 'styled-components'
 import Employee_Table from '@components/Employee/Employee_Table'
 import { theme } from '@styles/theme'
 import { useEmployeeStore } from 'zustandState/store'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 const Employee = () => {
   const { readEmployee } = useEmployeeStore()
+  const { searchEmployee } = useEmployeeStore()
+  const [search, setSearch] = useState('')
+  console.log('search:', search)
 
   useEffect(() => {
     readEmployee()
   }, [])
+  const onClickSearch = () => {
+    searchEmployee(search)
+  }
+  const OnKeyPress = (e: any) => {
+    if (e.key === 'Enter') {
+      if (search === '') {
+        alert('검색어를 입력해주세요')
+      } else {
+        searchEmployee(search) // Enter 입력이 되면 클릭 이벤트 실행
+      }
+    }
+  }
+
   return (
     <Wrap>
       <SideBar active={false} />
@@ -21,8 +37,17 @@ const Employee = () => {
         <Main>
           <SearchArea>
             <SearchWrap>
-              <Search placeholder="사원명을 입력해주세요" />
-              <Icon src="/imgs/search-icon.png" />
+              <Search
+                placeholder="사원명을 입력해주세요"
+                onChange={(e) => {
+                  setSearch(e.target.value)
+                }}
+                onKeyPress={OnKeyPress}
+              />
+              <Icon
+                src="/imgs/search-icon.png"
+                onClick={() => onClickSearch()}
+              />
             </SearchWrap>
           </SearchArea>
           <TableArea>

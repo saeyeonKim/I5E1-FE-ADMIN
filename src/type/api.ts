@@ -36,19 +36,20 @@ export interface IDutyList {
     position: string
   }
 }
+
+export interface IEmployeeItem {
+  annualCount: number
+  completedDutyCount: number
+  createdAt: string
+  email: string
+  id: number
+  name: string
+  position: string
+  tel: string
+}
+
 export interface IEmployeeList {
   currentPage: number
-  members: [
-    {
-      annualCount: number
-      completedDutyCount: number
-      createdAt: string
-      email: string
-      id: number
-      name: string
-      position: string
-      tel: string
-    }
-  ]
+  members: IEmployeeItem[]
   totalPages: number
 }
