@@ -1,12 +1,18 @@
 import { styled } from 'styled-components'
 import SideBar from '../components/SideBar'
-import { useState } from 'react'
-import Annual from '../components/Annual'
-import Duty from '../components/Duty'
+import { useEffect, useState } from 'react'
+import Annual from '../components/Annual/Annual'
+import Duty from '../components/Duty/Duty'
 import { theme } from '@styles/theme'
+import { useAnnualStore } from 'zustandState/store'
 
 const Annual_Duty = () => {
   const [active, setActive] = useState(true)
+  const { readAnnual } = useAnnualStore()
+
+  useEffect(() => {
+    readAnnual()
+  }, [])
   return (
     <Wrap>
       <SideBar active={true} />

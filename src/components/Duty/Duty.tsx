@@ -1,10 +1,10 @@
 import { styled } from 'styled-components'
-import Annual_Duty_Table from './Annual_Duty_Table'
+import Duty_Table from './Duty_Table'
 
 const Duty = () => {
   return (
     <Contain>
-      <Annual_Duty_Table />
+      <Duty_Table />
     </Contain>
   )
 }

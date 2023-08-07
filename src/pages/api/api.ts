@@ -21,7 +21,7 @@ const login = async ({ email, password }: ILogin) => {
 
 // 모든 연차 조회
 const getAnnual = async () => {
-  const res = await api.get(`/annual`)
+  const res = await api.get(`/annual?page=${1}`)
   return res.data
 }
 // 연차 수정
@@ -35,7 +35,7 @@ const deleteAnnual = async (annualId: IContent) => {
 }
 // 모든 당직 조회
 const getDuty = async () => {
-  const res = await api.get(`/duty`)
+  const res = await api.get(`/duty?page=${1}`)
   return res.data
 }
 // 당직 수정
