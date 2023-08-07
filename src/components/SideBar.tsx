@@ -1,8 +1,13 @@
 import { styled } from 'styled-components'
 import Link from 'next/link'
 import { theme } from '@styles/theme'
+import { useRouter } from 'next/router'
 
 const SideBar = ({ active }) => {
+  const router = useRouter()
+  const Logout = () => {
+    router.push('/')
+  }
   return (
     <>
       <SideBarArea>
@@ -47,7 +52,7 @@ const SideBar = ({ active }) => {
           )}
 
           <CustomLink href="/">
-            <UnActiveBtn>
+            <UnActiveBtn onClick={() => Logout()}>
               <Icon3 src="/imgs/logout.png" />
               로그아웃
             </UnActiveBtn>
