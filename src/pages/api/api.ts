@@ -50,7 +50,7 @@ const deleteDuty = async (dutyId: IContent) => {
 }
 // 모든 회원 조회
 const getUser = async () => {
-  const res = await api.get(`/user`)
+  const res = await api.get(`/user?page=${1}`)
   return res.data
 }
 // 회원 직급 조정

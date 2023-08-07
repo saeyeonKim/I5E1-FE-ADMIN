@@ -10,7 +10,7 @@ const Duty_Table = () => {
         <Name>사원명</Name>
         <Position>직급</Position>
         <Start>신청 일자</Start>
-        <End>마감 일자</End>
+        <Reason>사유</Reason>
         <State>처리 상태</State>
         <Btn></Btn>
       </NameArea>
@@ -67,7 +67,7 @@ const Start = styled.div`
   justify-content: center;
   align-items: center;
 `
-const End = styled.div`
+const Reason = styled.div`
   height: 100%;
   width: 18%;
   display: flex;

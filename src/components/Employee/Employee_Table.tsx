@@ -1,18 +1,22 @@
 import { styled } from 'styled-components'
 import { theme } from '@styles/theme'
+import EmployeeList from './EmployeeList'
 
 const Employee_Table = () => {
   return (
     <TableArea>
       <NameArea>
-        <p>No.</p>
-        <p>사원명</p>
-        <p>직급</p>
-        <p>입사 일자</p>
-        <p>잔여 연차</p>
-        <p>수행한 당직 일수</p>
-        <p></p>
+        <No>No</No>
+        <Name>사원명</Name>
+        <Position>직급</Position>
+        <Start>입사 일자</Start>
+        <Reason>잔여 연차</Reason>
+        <State>수행한 당직 일수</State>
+        <Btn></Btn>
       </NameArea>
+      <ContentArea>
+        <EmployeeList />
+      </ContentArea>
     </TableArea>
   )
 }
@@ -34,5 +38,61 @@ const NameArea = styled.div`
   align-items: center;
   font-size: 16px;
   letter-spacing: -0.05rem;
+`
+const No = styled.div`
+  height: 100%;
+  width: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+const Name = styled.div`
+  height: 100%;
+  width: 18%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+const Position = styled.div`
+  height: 100%;
+  width: 18%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+const Start = styled.div`
+  height: 100%;
+  width: 18%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+const Reason = styled.div`
+  height: 100%;
+  width: 18%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+const State = styled.div`
+  height: 100%;
+  width: 18%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+const Btn = styled.div`
+  height: 100%;
+  width: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+const ContentArea = styled.div`
+  width: 100%;
+  height: 90.9%;
+  background-color: transparent;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 `
 export default Employee_Table

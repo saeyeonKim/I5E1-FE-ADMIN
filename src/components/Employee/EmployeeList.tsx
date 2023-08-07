@@ -1,20 +1,21 @@
 import { theme } from '@styles/theme'
 import { styled } from 'styled-components'
-import { useDutyStore } from 'zustandState/store'
+import { useEmployeeStore } from 'zustandState/store'
 
-const DutyList = () => {
-  const { data } = useDutyStore()
-  console.log('dutydata:', data)
+const EmployeeList = () => {
+  const { data } = useEmployeeStore()
+  console.log('employeedata:', data)
+
   return (
     <>
-      {data.map((el, v) => (
+      {data?.members?.map((el, v) => (
         <ListContainer key={v}>
           <No>{el.id}</No>
-          <Name>{el.member.name}</Name>
-          <Position>{el.member.position}</Position>
-          <Start>{el.dutyDate}</Start>
-          <Reason>{el.reason}</Reason>
-          <State>{el.status}</State>
+          <Name>{el.name}</Name>
+          <Position>{el.position}</Position>
+          <Start>{el.createdAt.slice(0, 10)}</Start>
+          <End>{el.annualCount}</End>
+          <State>{el.completedDutyCount}</State>
           <BtnArea>
             <Btn>수정</Btn>
           </BtnArea>
@@ -60,7 +61,7 @@ const Start = styled.div`
   justify-content: center;
   align-items: center;
 `
-const Reason = styled.div`
+const End = styled.div`
   height: 100%;
   width: 18%;
   display: flex;
@@ -89,4 +90,4 @@ const Btn = styled.button`
   border: 1px solid ${theme.colors.gray};
 `
 
-export default DutyList
+export default EmployeeList

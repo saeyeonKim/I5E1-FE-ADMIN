@@ -2,8 +2,15 @@ import SideBar from '../components/SideBar'
 import { styled } from 'styled-components'
 import Employee_Table from '@components/Employee/Employee_Table'
 import { theme } from '@styles/theme'
+import { useEmployeeStore } from 'zustandState/store'
+import { useEffect } from 'react'
 
 const Employee = () => {
+  const { readEmployee } = useEmployeeStore()
+
+  useEffect(() => {
+    readEmployee()
+  }, [])
   return (
     <Wrap>
       <SideBar active={false} />
