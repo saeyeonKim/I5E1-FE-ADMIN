@@ -4,14 +4,16 @@ import { useEffect, useState } from 'react'
 import Annual from '../components/Annual/Annual'
 import Duty from '../components/Duty/Duty'
 import { theme } from '@styles/theme'
-import { useAnnualStore } from 'zustandState/store'
+import { useAnnualStore, useDutyStore } from 'zustandState/store'
 
 const Annual_Duty = () => {
   const [active, setActive] = useState(true)
   const { readAnnual } = useAnnualStore()
+  const { readDuty } = useDutyStore()
 
   useEffect(() => {
     readAnnual()
+    readDuty()
   }, [])
   return (
     <Wrap>
