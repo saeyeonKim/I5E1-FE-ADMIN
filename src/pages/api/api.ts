@@ -18,6 +18,14 @@ const login = async ({ email, password }: ILogin) => {
   })
   return res.data
 }
+// 로그아웃
+const logout = async () => {
+  const res = await api({
+    method: 'GET',
+    url: '/logout'
+  })
+  return res.data
+}
 
 // 모든 연차 조회
 const getAnnual = async () => {
@@ -66,6 +74,7 @@ const editAnnualCount = async (userId: IContent) => {
 
 export {
   login,
+  logout,
   getAnnual,
   getDuty,
   getUser,

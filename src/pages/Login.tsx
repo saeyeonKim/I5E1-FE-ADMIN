@@ -27,7 +27,7 @@ const Login = () => {
         }
       })
       .catch((error) => {
-        //console.log(error)
+        console.log(error)
         alert('로그인 실패')
       })
 
