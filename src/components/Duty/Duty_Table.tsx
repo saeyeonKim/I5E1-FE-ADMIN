@@ -25,6 +25,7 @@ const TableArea = styled.div`
   height: 670px;
   border: 1px solid ${theme.colors.blue.main};
   border-radius: 20px;
+  overflow: hidden;
 `
 const NameArea = styled.div`
   width: 100%;
@@ -76,14 +77,14 @@ const Reason = styled.div`
 `
 const State = styled.div`
   height: 100%;
-  width: 18%;
+  width: 15%;
   display: flex;
   justify-content: center;
   align-items: center;
 `
 const Btn = styled.div`
   height: 100%;
-  width: 5%;
+  width: 8%;
   display: flex;
   justify-content: center;
   align-items: center;

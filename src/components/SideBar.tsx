@@ -2,11 +2,23 @@ import { styled } from 'styled-components'
 import Link from 'next/link'
 import { theme } from '@styles/theme'
 import { useRouter } from 'next/router'
+import { logout } from '@pages/api/api'
 
 const SideBar = ({ active }) => {
   const router = useRouter()
   const Logout = () => {
-    router.push('/')
+    const res = logout()
+    console.log('logout:', res)
+    res
+      .then((res) => {
+        if (res.statusCode == 200) {
+          alert('로그아웃 성공')
+          router.push('/')
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
   return (
     <>

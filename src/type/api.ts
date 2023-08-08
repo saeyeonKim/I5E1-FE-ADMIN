@@ -1,15 +1,10 @@
-export interface IContent {
-  annualId: string
-  userId: string
-  dutyId: string
-}
 export interface ILogin {
   email: string
   password: string
 }
 export interface IAnnualList {
   endDate: string
-  id: number
+  annualId: number
   reason: string
   spentDays: number
   startDate: string
@@ -25,7 +20,7 @@ export interface IAnnualList {
 }
 export interface IDutyList {
   dutyDate: string
-  id: number
+  dutyId: number
   reason: string
   status: string
   member: {

@@ -7,7 +7,7 @@ import { login } from './api/api'
 const Login = () => {
   const [id, setId] = useState('')
   const [pw, setPw] = useState('')
-  const [check, setCheck] = useState(false)
+  const [check, setCheck] = useState(true)
   const router = useRouter()
 
   const LoginHandler = (e: React.MouseEvent) => {
@@ -20,6 +20,7 @@ const Login = () => {
     res
       .then((res) => {
         if (res.statusCode == 200) {
+          alert('로그인 성공')
           router.push('/Annual_Duty')
         } else {
           // 문제 있음.
@@ -27,7 +28,7 @@ const Login = () => {
         }
       })
       .catch((error) => {
-        //console.log(error)
+        console.log(error)
         alert('로그인 실패')
       })
 
