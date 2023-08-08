@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { IContent, ILogin } from '@type/api'
+import { ILogin } from '@type/api'
 
 // API 공통 영역 변수
 const api = axios.create({
@@ -33,12 +33,16 @@ const getAnnual = async () => {
   return res.data
 }
 // 연차 수정
-const editAnnual = async (annualId: IContent) => {
-  const res = await api.put(`/annual/${annualId}`)
+const editAnnual = async (status: string, annualId: number) => {
+  const res = await api({
+    method: 'PUT',
+    url: `/annual/${annualId}`,
+    data: { status }
+  })
   return res.data
 }
 // 연차 삭제
-const deleteAnnual = async (annualId: IContent) => {
+const deleteAnnual = async (annualId: string) => {
   const res = await api.delete(`/annual/${annualId}`)
 }
 // 모든 당직 조회
@@ -47,12 +51,16 @@ const getDuty = async () => {
   return res.data
 }
 // 당직 수정
-const editDuty = async (dutyId: IContent) => {
-  const res = await api.put(`/duty/${dutyId}`)
+const editDuty = async (status: string, dutyId: number) => {
+  const res = await api({
+    method: 'PUT',
+    url: `/duty/${dutyId}`,
+    data: { status }
+  })
   return res.data
 }
 // 당직 삭제
-const deleteDuty = async (dutyId: IContent) => {
+const deleteDuty = async (dutyId: string) => {
   const res = await api.delete(`/duty/${dutyId}`)
   return res.data
 }
@@ -62,13 +70,21 @@ const getUser = async () => {
   return res.data
 }
 // 회원 직급 조정
-const editEmployee = async (userId: IContent) => {
-  const res = await api.patch(`/position/${userId}`)
+const editEmployee = async (userId: string, position: string) => {
+  const res = await api({
+    method: 'PATCH',
+    url: `/position/${userId}`,
+    data: { position }
+  })
   return res.data
 }
 // 회원 연차횟수 조정
-const editAnnualCount = async (userId: IContent) => {
-  const res = await api.get(`/annual/${userId}`)
+const editAnnualCount = async (userId: string, count: number) => {
+  const res = await api({
+    method: 'GET',
+    url: `/annual/${userId}?size=${count}`
+    // data: { count }
+  })
   return res.data
 }
 
