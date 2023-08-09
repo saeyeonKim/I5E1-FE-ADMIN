@@ -6,9 +6,7 @@ import { theme } from '@styles/theme'
 
 const Annual = () => {
   const [offset, setOffset] = useState(0)
-  const { data, totalCount, currentPage } = useAnnualStore()
-  console.log('666', data)
-  console.log('offset:', offset)
+  const { data, totalCount, currentPage, readAnnual } = useAnnualStore()
 
   return (
     <Contain>
@@ -28,7 +26,10 @@ const Annual = () => {
                 {index == offset ? (
                   <PageActiveBtn
                     onClick={() => {
+                      console.log('1111')
+
                       setOffset(index)
+                      readAnnual(index + 1)
                     }}
                   >
                     {index + 1}
@@ -37,6 +38,7 @@ const Annual = () => {
                   <PageBtn
                     onClick={() => {
                       setOffset(index)
+                      readAnnual(index + 1)
                     }}
                   >
                     {index + 1}

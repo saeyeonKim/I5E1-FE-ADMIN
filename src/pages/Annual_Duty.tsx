@@ -12,8 +12,8 @@ const Annual_Duty = () => {
   const { readDuty } = useDutyStore()
 
   useEffect(() => {
-    readAnnual()
-    readDuty()
+    readAnnual(1)
+    readDuty(1)
   }, [])
   return (
     <Wrap>

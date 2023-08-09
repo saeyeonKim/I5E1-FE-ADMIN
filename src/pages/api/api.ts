@@ -28,8 +28,8 @@ const logout = async () => {
 }
 
 // 모든 연차 조회
-const getAnnual = async () => {
-  const res = await api.get(`/annual?page=${1}`)
+const getAnnual = async (page: number) => {
+  const res = await api.get(`/annual?page=${page}`)
   return res.data
 }
 // 연차 수정
@@ -46,8 +46,8 @@ const deleteAnnual = async (annualId: string) => {
   const res = await api.delete(`/annual/${annualId}`)
 }
 // 모든 당직 조회
-const getDuty = async () => {
-  const res = await api.get(`/duty?page=${1}`)
+const getDuty = async (page) => {
+  const res = await api.get(`/duty?page=${page}`)
   return res.data
 }
 // 당직 수정
@@ -65,8 +65,8 @@ const deleteDuty = async (dutyId: string) => {
   return res.data
 }
 // 모든 회원 조회
-const getUser = async () => {
-  const res = await api.get(`/user?page=${1}`)
+const getUser = async (page: number) => {
+  const res = await api.get(`/user?page=${page}`)
   return res.data
 }
 // 회원 직급 조정
@@ -90,7 +90,7 @@ const editAnnualCount = async (userId: string, count: number) => {
 const searchUser = async (query: string) => {
   const res = await api({
     method: 'GET',
-    url: `/api/search?query=${query}?page=${1}`,
+    url: `/search?query=${query}?page=${1}`,
     data: { query }
   })
   return res.data

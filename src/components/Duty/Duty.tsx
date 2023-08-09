@@ -6,9 +6,7 @@ import { theme } from '@styles/theme'
 
 const Duty = () => {
   const [offset, setOffset] = useState(0)
-  const { data, totalCount, currentPage } = useDutyStore()
-  console.log('666', data)
-  console.log('offset:', offset)
+  const { data, totalCount, currentPage, readDuty } = useDutyStore()
   return (
     <Contain>
       <Duty_Table />
@@ -28,6 +26,7 @@ const Duty = () => {
                   <PageActiveBtn
                     onClick={() => {
                       setOffset(index)
+                      readDuty(index + 1)
                     }}
                   >
                     {index + 1}
@@ -36,6 +35,7 @@ const Duty = () => {
                   <PageBtn
                     onClick={() => {
                       setOffset(index)
+                      readDuty(index + 1)
                     }}
                   >
                     {index + 1}
