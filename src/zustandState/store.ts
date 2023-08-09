@@ -1,4 +1,4 @@
-import { getAnnual, getDuty, getUser } from '@pages/api/api'
+import { getAnnual, getDuty, getUser, searchUser } from '@pages/api/api'
 import create from 'zustand'
 import { IAnnualList, IDutyList, IEmployeeItem, IEmployeeList } from '@type/api'
 
@@ -33,7 +33,7 @@ export const useDutyStore = create<{
   currentPage: 0,
   readDuty: () => {
     getDuty().then((res) => {
-      // console.log(res.data)
+      console.log('222', res.data)
       set(() => ({
         data: res.data.duties,
         totalCount: res.data.totalCount,
@@ -73,5 +73,13 @@ export const useEmployeeStore = create<{
     set((item) => ({
       searchdata: item.data.members.filter((item) => item.name.includes(name))
     }))
+  }
+}))
+export const searchEmployeeStore = create<{
+  data: any
+}>((set) => ({
+  data: [],
+  search: (query) => {
+    searchUser(query).then
   }
 }))

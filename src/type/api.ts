@@ -13,7 +13,7 @@ export interface IAnnualList {
   member: {
     annualCount: number
     email: string
-    id: number
+    memberId: number
     name: string
     position: string
   }
@@ -26,7 +26,7 @@ export interface IDutyList {
   member: {
     annualCount: number
     email: string
-    id: number
+    memberId: number
     name: string
     position: string
   }
