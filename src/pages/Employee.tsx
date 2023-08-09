@@ -2,25 +2,25 @@ import SideBar from '../components/SideBar'
 import { styled } from 'styled-components'
 import Employee_Table from '@components/Employee/Employee_Table'
 import { theme } from '@styles/theme'
-import { useEmployeeStore } from 'zustandState/store'
+import { searchEmployeeStore, useEmployeeStore } from 'zustandState/store'
 import { useEffect, useState } from 'react'
 
 const Employee = () => {
-  const { readEmployee, searchEmployee, currentPage, totalCount } =
-    useEmployeeStore()
+  const { readEmployee, currentPage, totalCount } = useEmployeeStore()
+  const { searchData } = searchEmployeeStore()
   const [search, setSearch] = useState('')
   const [offset, setOffset] = useState(0)
-  console.log('search:', search)
+  console.log('search:', searchData)
 
   useEffect(() => {
     readEmployee()
   }, [])
   const onClickSearch = () => {
-    searchEmployee(search)
+    searchData(search)
   }
   const OnKeyPress = (e: any) => {
     if (e.key === 'Enter') {
-      searchEmployee(search) // Enter 입력이 되면 클릭 이벤트 실행
+      searchData(search) // Enter 입력이 되면 클릭 이벤트 실행
     }
   }
 

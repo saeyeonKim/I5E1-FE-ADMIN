@@ -48,3 +48,19 @@ export interface IEmployeeList {
   members: IEmployeeItem[]
   totalPages: number
 }
+export interface ISearchEmployee {
+  totalCount: number
+  currentPage: number
+  members: [
+    {
+      name: string
+      id: number
+      position: string
+      email: string
+      annualCount: number
+      createdAt: string
+      tel: string
+      completedDutyCount: number
+    }
+  ]
+}

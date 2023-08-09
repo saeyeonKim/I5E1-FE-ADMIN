@@ -1,6 +1,12 @@
 import { getAnnual, getDuty, getUser, searchUser } from '@pages/api/api'
 import create from 'zustand'
-import { IAnnualList, IDutyList, IEmployeeItem, IEmployeeList } from '@type/api'
+import {
+  IAnnualList,
+  IDutyList,
+  IEmployeeItem,
+  IEmployeeList,
+  ISearchEmployee
+} from '@type/api'
 
 export const useAnnualStore = create<{
   data: IAnnualList[]
@@ -46,40 +52,46 @@ export const useEmployeeStore = create<{
   data: IEmployeeList
   totalCount: number
   currentPage: number
-  searchdata: IEmployeeItem[]
+  // searchdata: IEmployeeItem[]
   readEmployee: () => void
-  searchEmployee: (name: string) => void
+  // searchEmployee: (name: string) => void
 }>((set) => ({
   data: undefined,
   totalCount: 0,
   currentPage: 0,
-  searchdata: [],
+  // searchdata: [],
   readEmployee: () => {
     getUser().then((res) => {
-      console.log(res.data)
+      // console.log(res.data)
       set(() => ({
         data: res.data,
         currentPage: res.data.currentPage,
         totalCount: res.data.totalCount
       }))
 
-      set(() => ({
-        searchdata: res.data.members
-      }))
+      // set(() => ({
+      //   searchdata: res.data.members
+      // }))
     })
-  },
-
-  searchEmployee: (name: string) => {
-    set((item) => ({
-      searchdata: item.data.members.filter((item) => item.name.includes(name))
-    }))
   }
+
+  // searchEmployee: (name: string) => {
+  //   set((item) => ({
+  //     searchdata: item.data.members.filter((item) => item.name.includes(name))
+  //   }))
+  // }
 }))
 export const searchEmployeeStore = create<{
-  data: any
+  data: ISearchEmployee
+  searchData: (query: string) => void
 }>((set) => ({
-  data: [],
-  search: (query) => {
-    searchUser(query).then
+  data: undefined,
+  searchData: (query: string) => {
+    searchUser(query).then((res) => {
+      console.log('searchstore:', res.data)
+      set(() => ({
+        data: res.data
+      }))
+    })
   }
 }))

@@ -90,8 +90,7 @@ const editAnnualCount = async (userId: string, count: number) => {
 const searchUser = async (query: string) => {
   const res = await api({
     method: 'GET',
-    url: `/api/search?query=${query}?page=${1}`,
-    data: { query }
+    url: `/api/search?query=${query}&page=${1}`
   })
   return res.data
 }
