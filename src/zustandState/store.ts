@@ -1,97 +1,121 @@
-import { getAnnual, getDuty, getUser, searchUser } from '@pages/api/api'
-import create from 'zustand'
+import { getAnnual, getDuty, getUser, searchUser } from '@pages/api/api';
+import create from 'zustand';
 import {
   IAnnualList,
   IDutyList,
   IEmployeeItem,
   IEmployeeList,
-  ISearchEmployee
-} from '@type/api'
+  ISearchEmployee,
+} from '@type/api';
 
 export const useAnnualStore = create<{
-  data: IAnnualList[]
-  totalCount: number
-  currentPage: number
-  readAnnual: (page: number) => void
+  data: IAnnualList[];
+  totalCount: number;
+  currentPage: number;
+  updateDataStatus: (annualId: number, status: string) => void;
+  readAnnual: (page: number) => void;
 }>((set) => ({
   data: [],
   totalCount: 0,
   currentPage: 0,
+  updateDataStatus: (annualId: number, status: string) => {
+    set((state) => ({
+      data: state.data.map((el) =>
+        el.annualId === annualId ? { ...el, status } : el
+      ),
+    }));
+  },
   readAnnual: (page: number) => {
     getAnnual(page).then((res) => {
-      console.log('111111111', res.data)
-      set(() => ({
+      set({
         data: res.data.annuals,
         totalCount: res.data.totalCount,
-        currentPage: res.data.currentPage
-      }))
-    })
-  }
-}))
+        currentPage: res.data.currentPage,
+      });
+    });
+  },
+}));
+
 export const useDutyStore = create<{
-  data: IDutyList[]
-  totalCount: number
-  currentPage: number
-  readDuty: (page: number) => void
+  data: IDutyList[];
+  totalCount: number;
+  currentPage: number;
+  updateDataStatus: (dutyId: number, status: string) => void;
+  readDuty: (page: number) => void;
 }>((set) => ({
   data: [],
   totalCount: 0,
   currentPage: 0,
+  updateDataStatus: (dutyId: number, status: string) => {
+    set((state) => ({
+      data: state.data.map((el) =>
+        el.dutyId === dutyId ? { ...el, status } : el
+      ),
+    }));
+  },
   readDuty: (page: number) => {
     getDuty(page).then((res) => {
-      console.log('222', res.data)
-      set(() => ({
+      set({
         data: res.data.duties,
         totalCount: res.data.totalCount,
-        currentPage: res.data.currentPage
-      }))
-    })
-  }
-}))
+        currentPage: res.data.currentPage,
+      });
+    });
+  },
+}));
+
 export const useEmployeeStore = create<{
-  data: IEmployeeList
-  totalCount: number
-  currentPage: number
-  // searchdata: IEmployeeItem[]
-  readEmployee: (page: number) => void
-  // searchEmployee: (name: string) => void
+  data: IEmployeeList | undefined;
+  totalCount: number;
+  currentPage: number;
+  searchdata: IEmployeeItem[];
+  updateDataStatus: (id: number, updatedData: Partial<IEmployeeItem>) => void;
+  searchEmployee: (name: string) => void;
+  readEmployee: (page: number) => void;
 }>((set) => ({
   data: undefined,
   totalCount: 0,
   currentPage: 0,
-  // searchdata: [],
+  searchdata: [],
+  updateDataStatus: (id: number, updatedData: Partial<IEmployeeItem>) => {
+    set((state) => ({
+      data: state.data
+        ? {
+            ...state.data,
+            members: state.data.members.map((item) =>
+              item.id === id ? { ...item, ...updatedData } : item
+            ),
+          }
+        : undefined,
+    }));
+  },
   readEmployee: (page: number) => {
     getUser(page).then((res) => {
-      // console.log(res.data)
-      set(() => ({
+      set({
         data: res.data,
+        totalCount: res.data.totalCount,
         currentPage: res.data.currentPage,
-        totalCount: res.data.totalCount
-      }))
+        searchdata: res.data.members,
+      });
+    });
+  },
+  searchEmployee: (name: string) => {
+    set((state) => ({
+      searchdata: state.data
+        ? state.data.members.filter((item) => item.name.includes(name))
+        : [],
+    }));
+  },
+}));
 
-      // set(() => ({
-      //   searchdata: res.data.members
-      // }))
-    })
-  }
-
-  // searchEmployee: (name: string) => {
-  //   set((item) => ({
-  //     searchdata: item.data.members.filter((item) => item.name.includes(name))
-  //   }))
-  // }
-}))
 export const searchEmployeeStore = create<{
-  data: ISearchEmployee
-  searchData: (query: string) => void
+  data: ISearchEmployee | undefined;
+  searchData: (query: string) => void;
 }>((set) => ({
   data: undefined,
   searchData: (query: string) => {
     searchUser(query).then((res) => {
-      console.log('searchstore:', res.data)
-      set(() => ({
-        data: res.data
-      }))
-    })
-  }
-}))
+      set({ data: res.data });
+    });
+  },
+}));

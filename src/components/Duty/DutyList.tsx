@@ -4,17 +4,25 @@ import { styled } from 'styled-components'
 import { useDutyStore } from 'zustandState/store'
 
 const DutyList = () => {
-  const { data, currentPage } = useDutyStore()
+  const { data, currentPage, updateDataStatus } = useDutyStore()
   console.log('dutydata:', data)
 
-  const onClickEdit = (status: string, dutyId: number) => {
+  const onClickEdit = async (status: string, dutyId: number) => {
     // 수정(status)
+    console.log(status)
     console.log('dutyId :', dutyId)
-    const res = editDuty(status, dutyId)
-
-    res.then((res) => {
-      console.log('edit', res)
-    })
+    const statusKorean = status === 'APPROVED' ? '승인' : '반려'; // Convert to Korean status
+    try {
+      updateDataStatus(dutyId, statusKorean);
+      await editDuty(status, dutyId);
+    } catch (error) {
+      console.error('수정 오류:', error);
+      updateDataStatus(
+        dutyId,
+        data.find((el) => el.dutyId === dutyId)?.status || ''
+      );
+      alert('상태를 업데이트하는 동안 오류가 발생했습니다. 나중에 다시 시도해주세요.');
+    }
   }
   return (
     <>
@@ -47,7 +55,7 @@ const DutyList = () => {
 }
 const ListContainer = styled.div`
   width: 100%;
-  height: 10.02%;
+  height: 10.01%;
   background-color: transparent;
   border-bottom: 1px solid ${theme.colors.blue.main};
   display: flex;
@@ -110,11 +118,6 @@ const Btn = styled.button`
   background-color: transparent;
   border: 1px solid ${theme.colors.gray};
   font-size: 12px;
-  &:hover {
-    background-color: ${theme.colors.blue.main};
-    color: ${theme.colors.white};
-    border: none;
-  }
 `
 
 export default DutyList
