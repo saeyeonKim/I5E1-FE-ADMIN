@@ -2,12 +2,12 @@ import { useEmployeeStore } from 'zustandState/store'
 import Item from './Item'
 
 const EmployeeList = () => {
-  const { searchdata } = useEmployeeStore()
-  console.log('employeedata:', searchdata)
+  const { data } = useEmployeeStore()
+  // console.log('employeedata:', data)
 
   return (
     <>
-      {searchdata?.map((el, v) => (
+      {data?.members.map((el, v) => (
         <Item data={el} index={v} key={v} />
       ))}
     </>

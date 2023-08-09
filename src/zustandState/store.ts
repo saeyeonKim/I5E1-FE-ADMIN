@@ -1,6 +1,12 @@
-import { getAnnual, getDuty, getUser } from '@pages/api/api'
+import { getAnnual, getDuty, getUser, searchUser } from '@pages/api/api'
 import create from 'zustand'
-import { IAnnualList, IDutyList, IEmployeeItem, IEmployeeList } from '@type/api'
+import {
+  IAnnualList,
+  IDutyList,
+  IEmployeeItem,
+  IEmployeeList,
+  ISearchEmployee
+} from '@type/api'
 
 export const useAnnualStore = create<{
   data: IAnnualList[]
@@ -33,6 +39,7 @@ export const useDutyStore = create<{
   currentPage: 0,
   readDuty: (page: number) => {
     getDuty(page).then((res) => {
+      console.log('222', res.data)
       set(() => ({
         data: res.data.duties,
         totalCount: res.data.totalCount,
@@ -45,32 +52,46 @@ export const useEmployeeStore = create<{
   data: IEmployeeList
   totalCount: number
   currentPage: number
-  searchdata: IEmployeeItem[]
+  // searchdata: IEmployeeItem[]
   readEmployee: (page: number) => void
-  searchEmployee: (name: string) => void
+  // searchEmployee: (name: string) => void
 }>((set) => ({
   data: undefined,
   totalCount: 0,
   currentPage: 0,
-  searchdata: [],
+  // searchdata: [],
   readEmployee: (page: number) => {
     getUser(page).then((res) => {
-      console.log(res.data)
+      // console.log(res.data)
       set(() => ({
         data: res.data,
         currentPage: res.data.currentPage,
         totalCount: res.data.totalCount
       }))
 
+      // set(() => ({
+      //   searchdata: res.data.members
+      // }))
+    })
+  }
+
+  // searchEmployee: (name: string) => {
+  //   set((item) => ({
+  //     searchdata: item.data.members.filter((item) => item.name.includes(name))
+  //   }))
+  // }
+}))
+export const searchEmployeeStore = create<{
+  data: ISearchEmployee
+  searchData: (query: string) => void
+}>((set) => ({
+  data: undefined,
+  searchData: (query: string) => {
+    searchUser(query).then((res) => {
+      console.log('searchstore:', res.data)
       set(() => ({
-        searchdata: res.data.members
+        data: res.data
       }))
     })
-  },
-
-  searchEmployee: (name: string) => {
-    set((item) => ({
-      searchdata: item.data.members.filter((item) => item.name.includes(name))
-    }))
   }
 }))

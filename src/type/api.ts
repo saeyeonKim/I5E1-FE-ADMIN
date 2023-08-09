@@ -13,7 +13,7 @@ export interface IAnnualList {
   member: {
     annualCount: number
     email: string
-    id: number
+    memberId: number
     name: string
     position: string
   }
@@ -26,7 +26,7 @@ export interface IDutyList {
   member: {
     annualCount: number
     email: string
-    id: number
+    memberId: number
     name: string
     position: string
   }
@@ -47,4 +47,20 @@ export interface IEmployeeList {
   currentPage: number
   members: IEmployeeItem[]
   totalPages: number
+}
+export interface ISearchEmployee {
+  totalCount: number
+  currentPage: number
+  members: [
+    {
+      name: string
+      id: number
+      position: string
+      email: string
+      annualCount: number
+      createdAt: string
+      tel: string
+      completedDutyCount: number
+    }
+  ]
 }
