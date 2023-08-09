@@ -12,13 +12,13 @@ export const useAnnualStore = create<{
   data: IAnnualList[]
   totalCount: number
   currentPage: number
-  readAnnual: () => void
+  readAnnual: (page: number) => void
 }>((set) => ({
   data: [],
   totalCount: 0,
   currentPage: 0,
-  readAnnual: () => {
-    getAnnual().then((res) => {
+  readAnnual: (page: number) => {
+    getAnnual(page).then((res) => {
       console.log('111111111', res.data)
       set(() => ({
         data: res.data.annuals,
@@ -32,13 +32,13 @@ export const useDutyStore = create<{
   data: IDutyList[]
   totalCount: number
   currentPage: number
-  readDuty: () => void
+  readDuty: (page: number) => void
 }>((set) => ({
   data: [],
   totalCount: 0,
   currentPage: 0,
-  readDuty: () => {
-    getDuty().then((res) => {
+  readDuty: (page: number) => {
+    getDuty(page).then((res) => {
       console.log('222', res.data)
       set(() => ({
         data: res.data.duties,
@@ -53,15 +53,15 @@ export const useEmployeeStore = create<{
   totalCount: number
   currentPage: number
   // searchdata: IEmployeeItem[]
-  readEmployee: () => void
+  readEmployee: (page: number) => void
   // searchEmployee: (name: string) => void
 }>((set) => ({
   data: undefined,
   totalCount: 0,
   currentPage: 0,
   // searchdata: [],
-  readEmployee: () => {
-    getUser().then((res) => {
+  readEmployee: (page: number) => {
+    getUser(page).then((res) => {
       // console.log(res.data)
       set(() => ({
         data: res.data,

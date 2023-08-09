@@ -13,7 +13,7 @@ const Employee = () => {
   console.log('search:', searchData)
 
   useEffect(() => {
-    readEmployee()
+    readEmployee(1)
   }, [])
   const onClickSearch = () => {
     searchData(search)
@@ -67,6 +67,7 @@ const Employee = () => {
                         <PageActiveBtn
                           onClick={() => {
                             setOffset(index)
+                            readEmployee(index + 1)
                           }}
                         >
                           {index + 1}
@@ -75,6 +76,7 @@ const Employee = () => {
                         <PageBtn
                           onClick={() => {
                             setOffset(index)
+                            readEmployee(index + 1)
                           }}
                         >
                           {index + 1}

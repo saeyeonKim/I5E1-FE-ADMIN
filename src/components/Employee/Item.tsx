@@ -57,7 +57,7 @@ const Item = ({ data, index }) => {
       ) : (
         <Position>{data.position}</Position>
       )}
-      <Start>{data.createdAt.slice(0, 10)}</Start>
+      <Start>{data.createdAt?.slice(0, 10)}</Start>
       {mode ? (
         <SelectedCount>
           <MinusBtn onClick={() => setCount((el) => el - 1)}>-</MinusBtn>
