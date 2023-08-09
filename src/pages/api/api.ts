@@ -28,8 +28,8 @@ const logout = async () => {
 }
 
 // 모든 연차 조회
-const getAnnual = async () => {
-  const res = await api.get(`/annual?page=${1}`)
+const getAnnual = async (page: number) => {
+  const res = await api.get(`/annual?page=${page}`)
   return res.data
 }
 // 연차 수정
@@ -90,7 +90,7 @@ const editAnnualCount = async (userId: string, count: number) => {
 const searchUser = async (query: string) => {
   const res = await api({
     method: 'GET',
-    url: `/api/search?query=${query}?page=${1}`,
+    url: `/search?query=${query}?page=${1}`,
     data: { query }
   })
   return res.data
