@@ -6,9 +6,10 @@ import { useEmployeeStore } from 'zustandState/store'
 import { useEffect, useState } from 'react'
 
 const Employee = () => {
-  const { readEmployee } = useEmployeeStore()
-  const { searchEmployee } = useEmployeeStore()
+  const { readEmployee, searchEmployee, currentPage, totalCount } =
+    useEmployeeStore()
   const [search, setSearch] = useState('')
+  const [offset, setOffset] = useState(0)
   console.log('search:', search)
 
   useEffect(() => {
@@ -19,11 +20,7 @@ const Employee = () => {
   }
   const OnKeyPress = (e: any) => {
     if (e.key === 'Enter') {
-      if (search === '') {
-        alert('검색어를 입력해주세요')
-      } else {
-        searchEmployee(search) // Enter 입력이 되면 클릭 이벤트 실행
-      }
+      searchEmployee(search) // Enter 입력이 되면 클릭 이벤트 실행
     }
   }
 
@@ -53,7 +50,41 @@ const Employee = () => {
           <TableArea>
             <Employee_Table />
           </TableArea>
-          <PaginationArea></PaginationArea>
+          <PaginationArea>
+            <Pagination>
+              <PageUl
+                onClick={(e) => {
+                  if (e.target instanceof HTMLLIElement) {
+                    setOffset(currentPage)
+                  }
+                }}
+              >
+                {Array(parseInt((totalCount / 10 + 1).toString()))
+                  .fill(0)
+                  .map((i, index) => (
+                    <PageLi key={index} value={i}>
+                      {index == offset ? (
+                        <PageActiveBtn
+                          onClick={() => {
+                            setOffset(index)
+                          }}
+                        >
+                          {index + 1}
+                        </PageActiveBtn>
+                      ) : (
+                        <PageBtn
+                          onClick={() => {
+                            setOffset(index)
+                          }}
+                        >
+                          {index + 1}
+                        </PageBtn>
+                      )}
+                    </PageLi>
+                  ))}
+              </PageUl>
+            </Pagination>
+          </PaginationArea>
         </Main>
       </MainArea>
     </Wrap>
@@ -115,7 +146,7 @@ const Icon = styled.img`
 `
 const TableArea = styled.div`
   width: 100%;
-  height: 80%;
+  height: 90%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -123,6 +154,35 @@ const TableArea = styled.div`
 const PaginationArea = styled.div`
   width: 100%;
   height: 10%;
+`
+const Pagination = styled.div`
+  width: 100%;
+  height: 10%;
+`
+const PageUl = styled.ul`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+`
+const PageLi = styled.li`
+  list-style: none;
+`
+const PageActiveBtn = styled.button`
+  width: 35px;
+  height: 35px;
+  background-color: ${theme.colors.green};
+  border: none;
+  border-radius: 6px;
+  color: ${theme.colors.white};
+  cursor: pointer;
+`
+const PageBtn = styled.button`
+  width: 35px;
+  height: 35px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 `
 
 export default Employee

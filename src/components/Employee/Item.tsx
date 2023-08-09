@@ -184,6 +184,11 @@ const Btn = styled.button`
   background-color: transparent;
   border: 1px solid ${theme.colors.gray};
   cursor: pointer;
+  &:hover {
+    background-color: ${theme.colors.blue.main};
+    color: ${theme.colors.white};
+    border: none;
+  }
 `
 
 const BtnActive = styled.button`

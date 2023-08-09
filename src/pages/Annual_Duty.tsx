@@ -35,7 +35,6 @@ const Annual_Duty = () => {
             </Btns>
           )}
           <TableArea>{active ? <Annual /> : <Duty />}</TableArea>
-          <PaginationArea></PaginationArea>
         </Main>
       </MainArea>
     </Wrap>
@@ -62,6 +61,10 @@ const Logo = styled.img`
 const Main = styled.div`
   width: 100%;
   height: 85%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `
 const Btns = styled.div`
   width: 100%;
@@ -94,14 +97,10 @@ const UnActiveBtn = styled.button`
 `
 const TableArea = styled.div`
   width: 100%;
-  height: 80%;
+  height: 90%;
   display: flex;
   justify-content: center;
   align-items: center;
-`
-const PaginationArea = styled.div`
-  width: 100%;
-  height: 10%;
 `
 
 export default Annual_Duty
