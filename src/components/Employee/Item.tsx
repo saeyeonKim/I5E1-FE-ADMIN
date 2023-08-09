@@ -65,7 +65,9 @@ const Item = ({ data, index }) => {
           <PlusBtn onClick={() => setCount((el) => el + 1)}>+</PlusBtn>
         </SelectedCount>
       ) : (
-        <Count>{data.annualCount}</Count>
+        <CountArea>
+          <Count>{data.annualCount}</Count>
+        </CountArea>
       )}
       <State>{data.completedDutyCount}</State>
       <BtnArea>
@@ -115,7 +117,14 @@ const SelectedArea = styled.div`
   justify-content: center;
   align-items: center;
 `
-const SelectedPo = styled.select``
+const SelectedPo = styled.select`
+  width: 70px;
+  height: 30px;
+  font-size: 14px;
+  outline: none;
+  border: 1px solid ${theme.colors.gray};
+  border-radius: 6px;
+`
 const Start = styled.div`
   height: 100%;
   width: 18%;
@@ -123,16 +132,37 @@ const Start = styled.div`
   justify-content: center;
   align-items: center;
 `
-const SelectedCount = styled.div``
-const PlusBtn = styled.button``
-const MinusBtn = styled.button``
-const Count = styled.div`
+const SelectedCount = styled.div`
+  width: 18%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  align-items: center;
+`
+const PlusBtn = styled.button`
+  border: none;
+  background-color: transparent;
+  color: ${theme.colors.blue.main};
+  font-size: 20px;
+  cursor: pointer;
+  margin-top: 2px;
+`
+const MinusBtn = styled.button`
+  border: none;
+  background-color: transparent;
+  color: ${theme.colors.blue.main};
+  font-size: 25px;
+  cursor: pointer;
+`
+const CountArea = styled.div`
   height: 100%;
   width: 18%;
   display: flex;
   justify-content: center;
   align-items: center;
 `
+const Count = styled.div``
 const State = styled.div`
   height: 100%;
   width: 18%;
@@ -153,14 +183,22 @@ const Btn = styled.button`
   border-radius: 6px;
   background-color: transparent;
   border: 1px solid ${theme.colors.gray};
+  cursor: pointer;
+  &:hover {
+    background-color: ${theme.colors.blue.main};
+    color: ${theme.colors.white};
+    border: none;
+  }
 `
 
 const BtnActive = styled.button`
   width: 46px;
   height: 32px;
   border-radius: 6px;
-  background-color: blue;
-  border: 1px solid ${theme.colors.gray};
+  background-color: ${theme.colors.blue.main};
+  border: none;
+  color: ${theme.colors.white};
+  cursor: pointer;
 `
 
 export default Item

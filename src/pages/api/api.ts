@@ -83,7 +83,15 @@ const editAnnualCount = async (userId: string, count: number) => {
   const res = await api({
     method: 'GET',
     url: `/annual/${userId}?size=${count}`
-    // data: { count }
+  })
+  return res.data
+}
+// 회원 검색
+const searchUser = async (query: string) => {
+  const res = await api({
+    method: 'GET',
+    url: `/api/search?query=${query}?page=${1}`,
+    data: { query }
   })
   return res.data
 }
@@ -99,5 +107,6 @@ export {
   editDuty,
   deleteDuty,
   editEmployee,
-  editAnnualCount
+  editAnnualCount,
+  searchUser
 }

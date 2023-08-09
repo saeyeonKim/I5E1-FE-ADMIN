@@ -26,7 +26,7 @@ const SideBar = ({ active }) => {
         <ProfileArea>
           <ProfileImg src="/imgs/profile-example.png" />
           <Profile>
-            <ProfileName>신예은</ProfileName>
+            <ProfileName>I5E1</ProfileName>
             <ProfileStatus>관리자</ProfileStatus>
           </Profile>
         </ProfileArea>

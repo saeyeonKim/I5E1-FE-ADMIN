@@ -6,7 +6,7 @@ const Annual_Table = () => {
   return (
     <TableArea>
       <NameArea>
-        <No>No.</No>
+        <No>No</No>
         <Name>사원명</Name>
         <Position>직급</Position>
         <Start>신청 일자</Start>

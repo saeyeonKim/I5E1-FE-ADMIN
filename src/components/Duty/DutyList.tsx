@@ -47,7 +47,7 @@ const DutyList = () => {
 }
 const ListContainer = styled.div`
   width: 100%;
-  height: 10.01%;
+  height: 10.02%;
   background-color: transparent;
   border-bottom: 1px solid ${theme.colors.blue.main};
   display: flex;
@@ -110,6 +110,11 @@ const Btn = styled.button`
   background-color: transparent;
   border: 1px solid ${theme.colors.gray};
   font-size: 12px;
+  &:hover {
+    background-color: ${theme.colors.blue.main};
+    color: ${theme.colors.white};
+    border: none;
+  }
 `
 
 export default DutyList
