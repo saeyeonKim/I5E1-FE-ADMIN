@@ -87,10 +87,10 @@ const editAnnualCount = async (userId: string, count: number) => {
   return res.data
 }
 // 회원 검색
-const searchUser = async (query: string) => {
+const searchUser = async (query: string, page: number) => {
   const res = await api({
     method: 'GET',
-    url: `/api/search?query=${query}&page=${1}`
+    url: `/search?query=${query}&page=${page}`
   })
   return res.data
 }

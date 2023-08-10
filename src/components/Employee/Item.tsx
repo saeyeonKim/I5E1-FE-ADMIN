@@ -23,9 +23,11 @@ const Item = ({ data, index }) => {
     }
   };
   
+
   return (
     <ListContainer>
-      <No>{index + 1 + (currentPage - 1) * 10}</No>
+      <No>{index + 1 + (searchCurrent - 1) * 10}</No>
+
       <Name>{data.name}</Name>
       {mode ? (
         <SelectedArea>

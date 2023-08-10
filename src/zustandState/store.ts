@@ -65,18 +65,25 @@ export const useDutyStore = create<{
 }));
 
 export const useEmployeeStore = create<{
+
   data: IEmployeeList | undefined;
   totalCount: number;
   currentPage: number;
-  searchdata: IEmployeeItem[];
+  searchdata: IEmployeeList
+  searchCount: number
+  searchCurrent: number
   updateDataStatus: (id: number, updatedData: Partial<IEmployeeItem>) => void;
-  searchEmployee: (name: string) => void;
+  searchData: (name: string, page: number) => void
   readEmployee: (page: number) => void;
+
 }>((set) => ({
   data: undefined,
   totalCount: 0,
   currentPage: 0,
-  searchdata: [],
+
+  searchdata: undefined,
+  searchCurrent: 0,
+  searchCount: 0,
   updateDataStatus: (id: number, updatedData: Partial<IEmployeeItem>) => {
     set((state) => ({
       data: state.data
@@ -91,31 +98,49 @@ export const useEmployeeStore = create<{
   },
   readEmployee: (page: number) => {
     getUser(page).then((res) => {
-      set({
+      console.log('555', res.data)
+      set(() => ({
         data: res.data,
         totalCount: res.data.totalCount,
         currentPage: res.data.currentPage,
-        searchdata: res.data.members,
-      });
-    });
+      set(() => ({
+        searchdata: res.data
+      }))
+    })
   },
-  searchEmployee: (name: string) => {
-    set((state) => ({
-      searchdata: state.data
-        ? state.data.members.filter((item) => item.name.includes(name))
-        : [],
-    }));
+
+  searchData: (query: string, page: number) => {
+    searchUser(query, page).then((res) => {
+      console.log('searchstore:', res.data)
+      set(() => ({
+        searchdata: res.data,
+        searchCount: res.data.totalCount,
+        searchCurrent: res.data.currentPage
+      }))
+    }
   },
 }));
 
-export const searchEmployeeStore = create<{
-  data: ISearchEmployee | undefined;
-  searchData: (query: string) => void;
-}>((set) => ({
-  data: undefined,
-  searchData: (query: string) => {
-    searchUser(query).then((res) => {
-      set({ data: res.data });
-    });
+
+
+        totalCount: res.data.totalCount
+      }))
+
+      set(() => ({
+        searchdata: res.data
+      }))
+    })
   },
-}));
+
+  searchData: (query: string, page: number) => {
+    searchUser(query, page).then((res) => {
+      console.log('searchstore:', res.data)
+      set(() => ({
+        searchdata: res.data,
+        searchCount: res.data.totalCount,
+        searchCurrent: res.data.currentPage
+      }))
+    })
+  }
+}))
+

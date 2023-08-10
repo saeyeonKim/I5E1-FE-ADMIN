@@ -2,25 +2,25 @@ import SideBar from '../components/SideBar'
 import { styled } from 'styled-components'
 import Employee_Table from '@components/Employee/Employee_Table'
 import { theme } from '@styles/theme'
-import { searchEmployeeStore, useEmployeeStore } from 'zustandState/store'
+import { useEmployeeStore } from 'zustandState/store'
 import { useEffect, useState } from 'react'
 
 const Employee = () => {
-  const { readEmployee, currentPage, totalCount } = useEmployeeStore()
-  const { searchData } = searchEmployeeStore()
+  const { readEmployee, currentPage, totalCount, searchData, searchCount } =
+    useEmployeeStore()
   const [search, setSearch] = useState('')
   const [offset, setOffset] = useState(0)
-  console.log('search:', searchData)
+  console.log('count:', searchCount)
 
   useEffect(() => {
     readEmployee(1)
   }, [])
   const onClickSearch = () => {
-    searchData(search)
+    searchData(search, 1)
   }
   const OnKeyPress = (e: any) => {
     if (e.key === 'Enter') {
-      searchData(search) // Enter 입력이 되면 클릭 이벤트 실행
+      searchData(search, 1) // Enter 입력이 되면 클릭 이벤트 실행
     }
   }
 
@@ -66,8 +66,16 @@ const Employee = () => {
                       {index == offset ? (
                         <PageActiveBtn
                           onClick={() => {
-                            setOffset(index)
-                            readEmployee(index + 1)
+                            {
+                              searchData
+                                ? setOffset(searchCount)
+                                : setOffset(index)
+                            }
+                            {
+                              searchData
+                                ? searchData(search, index + 1)
+                                : readEmployee(index + 1)
+                            }
                           }}
                         >
                           {index + 1}
@@ -75,8 +83,17 @@ const Employee = () => {
                       ) : (
                         <PageBtn
                           onClick={() => {
-                            setOffset(index)
-                            readEmployee(index + 1)
+                            {
+                              searchData
+                                ? setOffset(searchCount)
+                                : setOffset(index)
+                            }
+
+                            {
+                              searchData
+                                ? searchData(search, index + 1)
+                                : readEmployee(index + 1)
+                            }
                           }}
                         >
                           {index + 1}
