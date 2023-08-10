@@ -7,22 +7,26 @@ import { useEffect, useState } from 'react'
 
 const Employee = () => {
   const { readEmployee, currentPage, totalCount, searchData, searchCount } =
-    useEmployeeStore()
-  const [search, setSearch] = useState('')
-  const [offset, setOffset] = useState(0)
-  console.log('count:', searchCount)
+    useEmployeeStore();
+  const [search, setSearch] = useState('');
+  const [offset, setOffset] = useState(1); // Start with the first page
+  console.log('count:', searchCount);
 
   useEffect(() => {
-    readEmployee(1)
-  }, [])
+    readEmployee(offset); // Fetch data based on the offset
+  }, [offset]);
+
   const onClickSearch = () => {
-    searchData(search, 1)
-  }
+    setOffset(1); // Reset offset to 1 when searching
+    searchData(search, 1);
+  };
+
   const OnKeyPress = (e: any) => {
     if (e.key === 'Enter') {
-      searchData(search, 1) // Enter 입력이 되면 클릭 이벤트 실행
+      setOffset(1); // Reset offset to 1 on Enter key press
+      searchData(search, 1);
     }
-  }
+  };
 
   return (
     <Wrap>
@@ -60,47 +64,28 @@ const Employee = () => {
                 }}
               >
                 {Array(parseInt((totalCount / 10 + 1).toString()))
-                  .fill(0)
-                  .map((i, index) => (
-                    <PageLi key={index} value={i}>
-                      {index == offset ? (
-                        <PageActiveBtn
-                          onClick={() => {
-                            {
-                              searchData
-                                ? setOffset(searchCount)
-                                : setOffset(index)
-                            }
-                            {
-                              searchData
-                                ? searchData(search, index + 1)
-                                : readEmployee(index + 1)
-                            }
-                          }}
-                        >
-                          {index + 1}
-                        </PageActiveBtn>
-                      ) : (
-                        <PageBtn
-                          onClick={() => {
-                            {
-                              searchData
-                                ? setOffset(searchCount)
-                                : setOffset(index)
-                            }
-
-                            {
-                              searchData
-                                ? searchData(search, index + 1)
-                                : readEmployee(index + 1)
-                            }
-                          }}
-                        >
-                          {index + 1}
-                        </PageBtn>
-                      )}
-                    </PageLi>
-                  ))}
+                .fill(0)
+                .map((_, index) => (
+                  <PageLi key={index}>
+                    {index + 1 === offset ? (
+                      <PageActiveBtn
+                        onClick={() => {
+                          setOffset(index + 1); // Update the offset when clicking on the active button
+                        }}
+                      >
+                        {index + 1}
+                      </PageActiveBtn>
+                    ) : (
+                      <PageBtn
+                        onClick={() => {
+                          setOffset(index + 1); // Update the offset when clicking on a non-active button
+                        }}
+                      >
+                        {index + 1}
+                      </PageBtn>
+                    )}
+                  </PageLi>
+                ))}
               </PageUl>
             </Pagination>
           </PaginationArea>
