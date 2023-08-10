@@ -6,11 +6,14 @@ import { editEmployee, editAnnualCount } from '@pages/api/api'
 
 const Item = ({ data, index }) => {
   const { updateDataStatus, searchCurrent, searchData, currentPage } = useEmployeeStore();
-  console.log(searchCurrent)
   const [mode, setMode] = useState(false);
   const [position, setPosition] = useState<string>(data.position);
   const [count, setCount] = useState<number>(data.annualCount);
   const positionList = ['BOSS', 'STAFF'];
+  // 현재 페이지에서 보여지는 아이템의 index를 계산
+  // (현재 페이지 - 1) * 페이지 당 아이템 수 + 아이템의 index + 1 로 계산됨
+  // 이를 통해 각 페이지마다 올바른 시작 Index로 아이템의 번호 표시가능
+  const displayIndex = (currentPage - 1) * 10 + index + 1;
 
   const editHandler = async () => {
     try {
@@ -29,11 +32,7 @@ const Item = ({ data, index }) => {
 
   return (
     <ListContainer>
-      {searchData ? (
-        <No>{index + 1 + (searchCurrent - 1) * 10}</No>
-      ) : (
-        <No>{index + 1 + (currentPage - 1) * 10}</No>
-      )}
+      <No>{displayIndex}</No>
 
       <Name>{data.name}</Name>
       {mode ? (
