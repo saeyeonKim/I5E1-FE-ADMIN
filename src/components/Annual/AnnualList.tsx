@@ -4,20 +4,26 @@ import { useAnnualStore } from 'zustandState/store'
 import { editAnnual } from '@pages/api/api'
 
 const AnnualList = () => {
-  const { data, currentPage } = useAnnualStore()
-  console.log('page:', currentPage)
+  const { data, currentPage, updateDataStatus } = useAnnualStore();
+  //console.log('page:', currentPage);
+  //console.log('data:', data);
 
-  console.log('data:', data)
+  const onClickEdit = async (status: string, annualId: number) => {
+    console.log(status);
 
-  const onClickEdit = (status: string, annualId: number) => {
-    // 수정(status)
-    console.log('annualId :', annualId)
-    const res = editAnnual(status, annualId)
-
-    res.then((res) => {
-      console.log('edit', res)
-    })
-  }
+    const statusKorean = status === 'APPROVED' ? '승인' : '반려'; // Convert to Korean status
+    try {
+      await editAnnual(status, annualId);
+      updateDataStatus(annualId, statusKorean);
+    } catch (error) {
+      console.error('수정 오류:', error);
+      updateDataStatus(
+        annualId,
+        data.find((el) => el.annualId === annualId)?.status || ''
+      );
+      alert('상태를 업데이트하는 동안 오류가 발생했습니다. 나중에 다시 시도해주세요.');
+    }
+  };
 
   return (
     <>
@@ -30,7 +36,7 @@ const AnnualList = () => {
           <End>{el.endDate}</End>
           <State>{el.status}</State>
           <BtnArea>
-            {el.status == '미승인' ? (
+            {el.status === '미승인' ? (
               <>
                 <Btn onClick={() => onClickEdit('APPROVED', el.annualId)}>
                   승인
@@ -50,7 +56,7 @@ const AnnualList = () => {
 }
 const ListContainer = styled.div`
   width: 100%;
-  height: 10.02%;
+  height: 10.01%;
   background-color: transparent;
   border-bottom: 1px solid ${theme.colors.blue.main};
   display: flex;
@@ -113,11 +119,6 @@ const Btn = styled.button`
   background-color: transparent;
   border: 1px solid ${theme.colors.gray};
   font-size: 12px;
-  &:hover {
-    background-color: ${theme.colors.blue.main};
-    color: ${theme.colors.white};
-    border: none;
-  }
 `
 
 export default AnnualList
