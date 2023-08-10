@@ -26,8 +26,6 @@ const Annual = () => {
                 {index == offset ? (
                   <PageActiveBtn
                     onClick={() => {
-                      console.log('1111')
-
                       setOffset(index)
                       readAnnual(index + 1)
                     }}

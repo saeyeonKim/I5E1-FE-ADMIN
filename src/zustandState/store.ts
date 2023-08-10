@@ -65,15 +65,15 @@ export const useDutyStore = create<{
 }))
 
 export const useEmployeeStore = create<{
-  data: IEmployeeList | undefined;
-  totalCount: number;
-  currentPage: number;
-  searchdata: IEmployeeList;
-  searchCount: number;
-  searchCurrent: number; // 추가: 검색 결과의 현재 페이지 번호
-  updateDataStatus: (id: number, updatedData: Partial<IEmployeeItem>) => void;
-  searchData: (name: string, page: number) => void;
-  readEmployee: (page: number) => void;
+  data: IEmployeeList | undefined
+  totalCount: number
+  currentPage: number
+  searchdata: IEmployeeList
+  searchCount: number
+  searchCurrent: number // 추가: 검색 결과의 현재 페이지 번호
+  updateDataStatus: (id: number, updatedData: Partial<IEmployeeItem>) => void
+  searchData: (name: string, page: number) => void
+  readEmployee: (page: number) => void
 }>((set) => ({
   data: undefined,
   totalCount: 0,
@@ -88,37 +88,38 @@ export const useEmployeeStore = create<{
             ...state.data,
             members: state.data.members.map((item) =>
               item.id === id ? { ...item, ...updatedData } : item
-            ),
+            )
           }
-        : undefined, searchdata: state.searchdata // 검색 결과도 함께 갱신
+        : undefined,
+      searchdata: state.searchdata // 검색 결과도 함께 갱신
         ? {
             ...state.searchdata,
             members: state.searchdata.members.map((item) =>
               item.id === id ? { ...item, ...updatedData } : item
-            ),
+            )
           }
-        : undefined,
-    }));
+        : undefined
+    }))
   },
   readEmployee: (page: number) => {
     getUser(page).then((res) => {
       set(() => ({
         data: res.data,
         totalCount: res.data.totalCount,
-        currentPage: res.data.currentPage,
-      }));
+        currentPage: res.data.currentPage
+      }))
       set(() => ({
-        searchdata: res.data,
-      }));
-    });
+        searchdata: res.data
+      }))
+    })
   },
   searchData: (query: string, page: number) => {
     searchUser(query, page).then((res) => {
       set(() => ({
         searchdata: res.data,
         searchCount: res.data.totalCount,
-        searchCurrent: res.data.currentPage, // 검색 결과의 현재 페이지 번호 업데이트
-      }));
-    });
-  },
-}));
+        searchCurrent: res.data.currentPage // 검색 결과의 현재 페이지 번호 업데이트
+      }))
+    })
+  }
+}))

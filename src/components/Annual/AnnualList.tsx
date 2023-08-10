@@ -4,26 +4,23 @@ import { useAnnualStore } from 'zustandState/store'
 import { editAnnual } from '@pages/api/api'
 
 const AnnualList = () => {
-  const { data, currentPage, updateDataStatus } = useAnnualStore();
-  //console.log('page:', currentPage);
-  //console.log('data:', data);
+  const { data, currentPage, updateDataStatus } = useAnnualStore()
 
   const onClickEdit = async (status: string, annualId: number) => {
-    console.log(status);
-
-    const statusKorean = status === 'APPROVED' ? '승인' : '반려'; // Convert to Korean status
+    const statusKorean = status === 'APPROVED' ? '승인' : '반려' // Convert to Korean status
     try {
-      await editAnnual(status, annualId);
-      updateDataStatus(annualId, statusKorean);
+      await editAnnual(status, annualId)
+      updateDataStatus(annualId, statusKorean)
     } catch (error) {
-      console.error('수정 오류:', error);
       updateDataStatus(
         annualId,
         data.find((el) => el.annualId === annualId)?.status || ''
-      );
-      alert('상태를 업데이트하는 동안 오류가 발생했습니다. 나중에 다시 시도해주세요.');
+      )
+      alert(
+        '상태를 업데이트하는 동안 오류가 발생했습니다. 나중에 다시 시도해주세요.'
+      )
     }
-  };
+  }
 
   return (
     <>

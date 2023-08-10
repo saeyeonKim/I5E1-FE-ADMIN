@@ -5,30 +5,28 @@ import { useEmployeeStore } from 'zustandState/store'
 import { editEmployee, editAnnualCount } from '@pages/api/api'
 
 const Item = ({ data, index }) => {
-  const { updateDataStatus, searchCurrent, searchData, currentPage } = useEmployeeStore();
-  const [mode, setMode] = useState(false);
-  const [position, setPosition] = useState<string>(data.position);
-  const [count, setCount] = useState<number>(data.annualCount);
-  const positionList = ['BOSS', 'STAFF'];
+  const { updateDataStatus, searchCurrent, searchData, currentPage } =
+    useEmployeeStore()
+  const [mode, setMode] = useState(false)
+  const [position, setPosition] = useState<string>(data.position)
+  const [count, setCount] = useState<number>(data.annualCount)
+  const positionList = ['BOSS', 'STAFF']
   // 현재 페이지에서 보여지는 아이템의 index를 계산
   // (현재 페이지 - 1) * 페이지 당 아이템 수 + 아이템의 index + 1 로 계산됨
   // 이를 통해 각 페이지마다 올바른 시작 Index로 아이템의 번호 표시가능
-  const displayIndex = (currentPage - 1) * 10 + index + 1;
+  const displayIndex = (currentPage - 1) * 10 + index + 1
 
   const editHandler = async () => {
     try {
-      await editEmployee(data.id, position);
-      await editAnnualCount(data.id, count);
+      await editEmployee(data.id, position)
+      await editAnnualCount(data.id, count)
 
       // 즉시 데이터 갱신
-      updateDataStatus(data.id, { position, annualCount: count });
+      updateDataStatus(data.id, { position, annualCount: count })
 
-      setMode(false);
-    } catch (error) {
-      console.error('업데이트 오류:', error);
-    }
-  };
-
+      setMode(false)
+    } catch (error) {}
+  }
 
   return (
     <ListContainer>

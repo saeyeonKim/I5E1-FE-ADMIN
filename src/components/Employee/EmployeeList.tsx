@@ -3,7 +3,6 @@ import Item from './Item'
 
 const EmployeeList = () => {
   const { searchdata } = useEmployeeStore()
-  console.log('employeedata:', searchdata)
 
   return (
     <>

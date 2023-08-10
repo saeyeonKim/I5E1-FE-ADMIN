@@ -28,8 +28,7 @@ const Login = () => {
         }
       })
       .catch((error) => {
-        console.log(error)
-        alert('로그인 실패')
+        alert(error)
       })
 
     // 체크상태시 id 저장

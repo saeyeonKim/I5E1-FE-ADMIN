@@ -8,7 +8,6 @@ const SideBar = ({ active }) => {
   const router = useRouter()
   const Logout = () => {
     const res = logout()
-    console.log('logout:', res)
     res
       .then((res) => {
         if (res.statusCode == 200) {
@@ -17,7 +16,7 @@ const SideBar = ({ active }) => {
         }
       })
       .catch((error) => {
-        console.log(error)
+        alert(error)
       })
   }
   return (
