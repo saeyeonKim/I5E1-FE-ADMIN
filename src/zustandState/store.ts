@@ -52,46 +52,55 @@ export const useEmployeeStore = create<{
   data: IEmployeeList
   totalCount: number
   currentPage: number
-  // searchdata: IEmployeeItem[]
+  searchdata: IEmployeeList
+  searchCount: number
+  searchCurrent: number
   readEmployee: (page: number) => void
-  // searchEmployee: (name: string) => void
+  searchData: (name: string, page: number) => void
 }>((set) => ({
   data: undefined,
   totalCount: 0,
   currentPage: 0,
-  // searchdata: [],
+  searchdata: undefined,
+  searchCurrent: 0,
+  searchCount: 0,
   readEmployee: (page: number) => {
     getUser(page).then((res) => {
-      // console.log(res.data)
+      console.log('555', res.data)
       set(() => ({
         data: res.data,
         currentPage: res.data.currentPage,
         totalCount: res.data.totalCount
       }))
 
-      // set(() => ({
-      //   searchdata: res.data.members
-      // }))
+      set(() => ({
+        searchdata: res.data
+      }))
     })
-  }
+  },
 
-  // searchEmployee: (name: string) => {
-  //   set((item) => ({
-  //     searchdata: item.data.members.filter((item) => item.name.includes(name))
-  //   }))
-  // }
-}))
-export const searchEmployeeStore = create<{
-  data: ISearchEmployee
-  searchData: (query: string) => void
-}>((set) => ({
-  data: undefined,
-  searchData: (query: string) => {
-    searchUser(query).then((res) => {
+  searchData: (query: string, page: number) => {
+    searchUser(query, page).then((res) => {
       console.log('searchstore:', res.data)
       set(() => ({
-        data: res.data
+        searchdata: res.data,
+        searchCount: res.data.totalCount,
+        searchCurrent: res.data.currentPage
       }))
     })
   }
 }))
+// export const searchEmployeeStore = create<{
+//   searchList: ISearchEmployee
+//   searchData: (query: string, page: number) => void
+// }>((set) => ({
+//   searchList: undefined,
+//   searchData: (query: string, page: number) => {
+//     searchUser(query, page).then((res) => {
+//       console.log('searchstore:', res.data)
+//       set(() => ({
+//         searchList: res.data
+//       }))
+//     })
+//   }
+// }))

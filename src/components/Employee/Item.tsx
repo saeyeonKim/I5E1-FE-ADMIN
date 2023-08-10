@@ -5,7 +5,7 @@ import { useEmployeeStore } from 'zustandState/store'
 import { editEmployee, editAnnualCount } from '@pages/api/api'
 
 const Item = ({ data, index }) => {
-  const { currentPage } = useEmployeeStore()
+  const { currentPage, searchCurrent, searchData } = useEmployeeStore()
   const [mode, setMode] = useState(false)
   const [position, setPosition] = useState<string>(data.position)
   const [count, setCount] = useState<number>(data.annualCount)
@@ -37,9 +37,12 @@ const Item = ({ data, index }) => {
       })
     })
   }
+  console.log('searchcurrent:', searchCurrent)
+
   return (
     <ListContainer>
-      <No>{index + 1 + (currentPage - 1) * 10}</No>
+      <No>{index + 1 + (searchCurrent - 1) * 10}</No>
+
       <Name>{data.name}</Name>
       {mode ? (
         <SelectedArea>

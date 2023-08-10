@@ -6,7 +6,7 @@ import { theme } from '@styles/theme'
 
 const Duty = () => {
   const [offset, setOffset] = useState(0)
-  const { data, totalCount, currentPage, readDuty } = useDutyStore()
+  const { totalCount, currentPage, readDuty } = useDutyStore()
   return (
     <Contain>
       <Duty_Table />
