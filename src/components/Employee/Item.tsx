@@ -5,24 +5,23 @@ import { useEmployeeStore } from 'zustandState/store'
 import { editEmployee, editAnnualCount } from '@pages/api/api'
 
 const Item = ({ data, index }) => {
-  const { currentPage, updateDataStatus } = useEmployeeStore();
-  const [mode, setMode] = useState(false);
-  const [position, setPosition] = useState<string>(data.position);
-  const [count, setCount] = useState<number>(data.annualCount);
-  const positionList = ['BOSS', 'STAFF'];
+  const { currentPage, updateDataStatus, searchCurrent } = useEmployeeStore()
+  const [mode, setMode] = useState(false)
+  const [position, setPosition] = useState<string>(data.position)
+  const [count, setCount] = useState<number>(data.annualCount)
+  const positionList = ['BOSS', 'STAFF']
 
   const editHandler = async () => {
     try {
-      await editEmployee(data.id, position);
-      await editAnnualCount(data.id, count);
+      await editEmployee(data.id, position)
+      await editAnnualCount(data.id, count)
 
-      updateDataStatus(data.id, { position, annualCount: count });
-      setMode(false);
+      updateDataStatus(data.id, { position, annualCount: count })
+      setMode(false)
     } catch (error) {
-      console.error('Error updating employee:', error);
+      console.error('Error updating employee:', error)
     }
-  };
-  
+  }
 
   return (
     <ListContainer>
